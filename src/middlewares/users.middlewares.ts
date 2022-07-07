@@ -1,15 +1,17 @@
 import { NextFunction, Request, Response } from 'express';
 import * as Joi from 'joi';
-import IProducts from '../interfaces/products.interface';
+import IUsers from '../interfaces/users.interface';
 import HttpException from '../utils/http.exeception';
 
-const productsSchema = Joi.object<IProducts>({
-  name: Joi.string().min(2).required()
+const productsSchema = Joi.object<IUsers>({
+  username: Joi.string().min(2).required()
     .messages({ 'string.min': '{{#label}} length must be at least 3 characters long' }),
-  amount: Joi.string().min(3).required(),
+  classe: Joi.string().min(2).required(),
+  level: Joi.number().min(1).required(),
+  password: Joi.string().min(8).required(),
 });
 
-const validSchemaProducts = (req: Request, __res: Response, next: NextFunction) => {
+const validSchemaUser = (req: Request, __res: Response, next: NextFunction) => {
   const { error } = productsSchema.validate(
     req.body,
     { abortEarly: false },
@@ -23,4 +25,4 @@ const validSchemaProducts = (req: Request, __res: Response, next: NextFunction) 
   throw new HttpException(status, message);
 };
 
-export default validSchemaProducts;
+export default validSchemaUser;
