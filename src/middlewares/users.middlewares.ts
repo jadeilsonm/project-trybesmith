@@ -4,9 +4,8 @@ import IUsers from '../interfaces/users.interface';
 import HttpException from '../utils/http.exeception';
 
 const productsSchema = Joi.object<IUsers>({
-  username: Joi.string().min(2).required()
-    .messages({ 'string.min': '{{#label}} length must be at least 3 characters long' }),
-  classe: Joi.string().min(2).required(),
+  username: Joi.string().min(3).required(), 
+  classe: Joi.string().min(3).required(),
   level: Joi.number().min(1).required(),
   password: Joi.string().min(8).required(),
 });

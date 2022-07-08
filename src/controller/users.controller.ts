@@ -8,8 +8,8 @@ userRouter.post(
   '/', 
   validSchemaUser,
   async (req: Request, res: Response): Promise<Response> => {
-    const product = await userServices.createdUser(req.body);
-    return res.status(201).json(product);
+    const token = await userServices.createdUser(req.body);
+    return res.status(201).json({ token });
   },
 );
 
