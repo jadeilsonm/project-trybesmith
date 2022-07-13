@@ -9,7 +9,7 @@ userRouter.post(
   validSchemaUser,
   async (req: Request, res: Response): Promise<Response> => {
     const token = await userServices.createdUser(req.body);
-    return res.status(201).json({ token });
+    return res.status(201).json(token);
   },
 );
 
