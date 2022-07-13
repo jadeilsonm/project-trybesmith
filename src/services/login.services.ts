@@ -11,9 +11,6 @@ const login = async (u: IUsers): Promise<IToken> => {
   if (!user) {
     throw new HttpException(401, 'Username or password invalid');
   }
-  // if (JSON.stringify(user) === '[]') {
-  //   throw new HttpException(401, 'Username or password invalid');
-  // }
   const token = generateJWTToken(JSON.stringify(user));
   
   return { token };
