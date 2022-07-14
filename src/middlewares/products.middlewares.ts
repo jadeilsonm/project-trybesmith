@@ -5,8 +5,7 @@ import IProducts from '../interfaces/products.interface';
 import HttpException from '../utils/http.exeception';
 
 const productsSchema = Joi.object<IProducts>({
-  name: Joi.string().min(2).required()
-    .messages({ 'string.min': '{{#label}} length must be at least 3 characters long' }),
+  name: Joi.string().min(3).required(),
   amount: Joi.string().min(3).required(),
 });
 
