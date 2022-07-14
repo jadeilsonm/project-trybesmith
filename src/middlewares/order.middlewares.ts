@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import * as Joi from 'joi';
 import { IOrder } from '../interfaces/orders.interface';
 import HttpException from '../utils/http.exeception';
@@ -17,8 +18,8 @@ const validateSchemaOrds = (req: Request, __res: Response, next: NextFunction) =
     return next();
   }
   const [message] = error.details.map((e) => e.message);
-  let status = 422;
-  if (message.includes('is required')) status = 400;
+  let status = StatusCodes.UNPROCESSABLE_ENTITY;
+  if (message.includes('is required')) status = StatusCodes.BAD_REQUEST;
   throw new HttpException(status, message);
 };
 

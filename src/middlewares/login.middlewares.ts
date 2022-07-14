@@ -1,15 +1,16 @@
 import { NextFunction, Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import * as Joi from 'joi';
 import IUsers from '../interfaces/users.interface';
 import HttpException from '../utils/http.exeception';
 
-const productsSchema = Joi.object<IUsers>({
+const loginSchema = Joi.object<IUsers>({
   username: Joi.string().required(), 
   password: Joi.string().required(),
 });
 
 const validateSchemaLogin = (req: Request, __res: Response, next: NextFunction) => {
-  const { error } = productsSchema.validate(
+  const { error } = loginSchema.validate(
     req.body,
     { abortEarly: false },
   );
@@ -17,8 +18,8 @@ const validateSchemaLogin = (req: Request, __res: Response, next: NextFunction) 
     return next();
   }
   const [message] = error.details.map((e) => e.message);
-  let status = 422;
-  if (message.includes('is required')) status = 400;
+  let status = StatusCodes.UNPROCESSABLE_ENTITY;
+  if (message.includes('is required')) status = StatusCodes.BAD_REQUEST;
   throw new HttpException(status, message);
 };
 
