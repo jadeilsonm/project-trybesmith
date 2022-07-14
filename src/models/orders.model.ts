@@ -1,3 +1,4 @@
+import { ResultSetHeader } from 'mysql2';
 import IOrders from '../interfaces/orders.interface';
 import connection from './connection';
 
@@ -11,4 +12,10 @@ const getOrders = async (): Promise<IOrders[]> => {
   return rows as IOrders[];
 };
 
-export default { getOrders };
+const creatOrders = async (id: number) => {
+  const [result] = await connection
+    .execute<ResultSetHeader>('INSERT INTO Trybesmith.Orders(userId) VALUES(?)', [id]);
+  return result;
+};
+
+export default { getOrders, creatOrders };

@@ -2,7 +2,7 @@ import IToken from '../interfaces/token.interface';
 import IUsers from '../interfaces/users.interface';
 import selectUser from '../models/login.model';
 import HttpException from '../utils/http.exeception';
-import generateJWTToken from '../utils/JWTToken';
+import { generateJWTToken } from '../utils/JWTToken';
 
 const login = async (u: IUsers): Promise<IToken> => {
   const allUser = await selectUser();
