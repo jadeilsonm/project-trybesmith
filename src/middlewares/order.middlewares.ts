@@ -5,12 +5,12 @@ import { IOrder } from '../interfaces/orders.interface';
 import HttpException from '../utils/http.exeception';
 
 // https://joi.dev/api/?v=17.6.0#arrayincludesrequiredunknowns
-const productsSchema = Joi.object<IOrder>({
+const ordersSchema = Joi.object<IOrder>({
   productsIds: Joi.array().items(Joi.number().min(1).required()).required(),
 }).messages({ 'array.includesRequiredUnknowns': '{{#label}} must include only numbers' });
 
 const validateSchemaOrds = (req: Request, __res: Response, next: NextFunction) => {
-  const { error } = productsSchema.validate(
+  const { error } = ordersSchema.validate(
     req.body,
     { abortEarly: false },
   );

@@ -4,7 +4,7 @@ import * as Joi from 'joi';
 import IUsers from '../interfaces/users.interface';
 import HttpException from '../utils/http.exeception';
 
-const productsSchema = Joi.object<IUsers>({
+const usersSchema = Joi.object<IUsers>({
   username: Joi.string().min(3).required(), 
   classe: Joi.string().min(3).required(),
   level: Joi.number().min(1).required(),
@@ -12,7 +12,7 @@ const productsSchema = Joi.object<IUsers>({
 });
 
 const validSchemaUser = (req: Request, __res: Response, next: NextFunction) => {
-  const { error } = productsSchema.validate(
+  const { error } = usersSchema.validate(
     req.body,
     { abortEarly: false },
   );
